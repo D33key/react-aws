@@ -5,6 +5,9 @@ import { Amplify } from 'aws-amplify';
 import Providers from './core/Providers/Providers';
 import './index.css';
 
+import { RouterProvider } from 'react-router-dom';
+import router from './core/router';
+
 Amplify.configure({
 	Auth: {
 		Cognito: {
@@ -17,12 +20,7 @@ Amplify.configure({
 function App() {
 	return (
 		<Providers>
-			{({ signOut, user }) => (
-				<main>
-					<h1>Hello {user?.username}</h1>
-					<button onClick={signOut}>Sign out</button>
-				</main>
-			)}
+			<RouterProvider router={router} />
 		</Providers>
 	);
 }
