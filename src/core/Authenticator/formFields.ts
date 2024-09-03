@@ -13,30 +13,34 @@ export const formFields: AuthenticatorProps['formFields'] = {
 		},
 	},
 	signUp: {
-		email: {
+		username: {
 			label: 'Email: ',
 			placeholder: 'Enter your email',
 			isRequired: true,
+			order: 1,
 		},
 		given_name: {
 			label: 'First name: ',
 			placeholder: 'Enter your first name',
 			isRequired: true,
+			order: 2,
+		},
+		phone_number: {
+			label: 'Phone: ',
 		},
 		family_name: {
 			label: 'Second name: ',
 			placeholder: 'Enter your second name',
 			isRequired: true,
+			order: 3,
 		},
 		password: {
 			label: 'Password:',
 			placeholder: 'Enter your Password:',
 			isRequired: true,
-			order: 2,
 		},
 		confirm_password: {
 			label: 'Confirm Password:',
-			order: 1,
 		},
 	},
 	forceNewPassword: {

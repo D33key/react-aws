@@ -47,6 +47,7 @@ export const components: AuthenticatorProps['components'] = {
 				</Heading>
 			);
 		},
+		
 		Footer() {
 			const { toForgotPassword } = useAuthenticator();
 

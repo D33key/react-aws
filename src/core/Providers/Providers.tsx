@@ -1,11 +1,11 @@
-import { AuthenticatorProps } from '@aws-amplify/ui-react';
-import Authenticator from '../Authenticator/Authenticator';
+import { Authenticator } from '@aws-amplify/ui-react';
+
 import ThemeProvider from './ThemeProvider/ThemeProvider';
 
-const Providers = (props: AuthenticatorProps) => {
+const Providers = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ThemeProvider>
-			<Authenticator>{props.children}</Authenticator>
+			<Authenticator.Provider>{children}</Authenticator.Provider>
 		</ThemeProvider>
 	);
 };
