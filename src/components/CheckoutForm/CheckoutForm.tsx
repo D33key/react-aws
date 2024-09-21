@@ -4,6 +4,8 @@ import {
 	useStripe,
 } from '@stripe/react-stripe-js';
 import { useState } from 'react';
+import classes from './CheckoutForm.module.css';
+import { Button } from '@aws-amplify/ui-react';
 
 function CheckoutForm() {
 	const stripe = useStripe();
@@ -54,11 +56,17 @@ function CheckoutForm() {
 		}
 	};
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className={classes.wrapper}>
 			<PaymentElement />
-			<button type='submit' disabled={!stripe || !elements}>
+			<Button
+				marginTop='20px'
+				type='submit'
+				variation='primary'
+				disabled={!stripe || !elements}
+				isFullWidth
+			>
 				Pay
-			</button>
+			</Button>
 			{/* Show error message to your customers */}
 			{errorMessage && <div>{errorMessage}</div>}
 		</form>

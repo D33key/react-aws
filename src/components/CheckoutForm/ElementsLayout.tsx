@@ -6,11 +6,9 @@ import generalAPI from '../../core/HTTPTransport/GeneralApi';
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT);
 
 function ElementsLayout({ children }: { children: React.ReactNode }) {
-	const [paymentOptions, setPaymentOptions] = useState<StripeElementsOptions>({
-		mode: 'payment',
-		amount: 1099,
-		currency: 'usd',
-	});
+	const [paymentOptions, setPaymentOptions] = useState<StripeElementsOptions>(
+		{},
+	);
 
 	useEffect(() => {
 		generalAPI
@@ -22,7 +20,7 @@ function ElementsLayout({ children }: { children: React.ReactNode }) {
 
 	return (
 		<Elements stripe={stripePromise} options={paymentOptions}>
-			{children}
+			{Object.keys(paymentOptions).length > 0 && children}
 		</Elements>
 	);
 }
