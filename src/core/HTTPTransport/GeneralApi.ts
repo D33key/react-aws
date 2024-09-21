@@ -84,6 +84,14 @@ class GeneralApi extends BaseApi {
 		}
 	}
 
+	async clearCart() {
+		const currentCart = await this.cartInfo();
+
+		currentCart.forEach(async (item) => {
+			await this.deleteProductFromCart(item.ItemId);
+		});
+	}
+
 	async totalAmountPayment() {
 		const tokens = await fetchAuthSession();
 		const userToken = tokens.userSub;
@@ -95,9 +103,6 @@ class GeneralApi extends BaseApi {
 		const data = await response.json();
 
 		return {
-			// mode: 'payment',
-			// amount: data.totalAmount * 100,
-			// currency: data.currency.toLowerCase(),
 			clientSecret: data.clientSecret,
 			appearance: {
 				theme: 'stripe',

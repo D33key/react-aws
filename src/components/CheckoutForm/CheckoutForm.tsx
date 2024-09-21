@@ -4,10 +4,14 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import generalAPI from '../../core/HTTPTransport/GeneralApi';
 import classes from './CheckoutForm.module.css';
+import { useNavigate } from 'react-router-dom';
+import { useShoppingCart } from '../../core/Providers/CartProvider';
 
 function CheckoutForm() {
 	const stripe = useStripe();
 	const elements = useElements();
+	const navigate = useNavigate();
+	const { clearCart } = useShoppingCart();
 
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -29,15 +33,6 @@ function CheckoutForm() {
 
 		const { clientSecret } = res;
 
-		// const { error } = await stripe!.confirmPayment({
-		// 	//`Elements` instance that was used to create the Payment Element
-		// 	elements,
-		// 	clientSecret: clientSecret ?? '',
-		// 	confirmParams: {
-		// 		return_url: '/complete',
-		// 	},
-		// });
-
 		toast.info('Check payment...');
 
 		const { error, paymentIntent } = await stripe!.confirmCardPayment(
@@ -55,8 +50,10 @@ function CheckoutForm() {
 		if (error) {
 			setErrorMessage(error.message ?? '');
 		} else {
-			console.log(paymentIntent);
+			await generalAPI.clearCart();
+			clearCart();
 			toast.success('Succesed');
+			navigate('/');
 		}
 	};
 	return (

@@ -18,7 +18,7 @@ interface ShoppingCartContext {
 	setProductsFromBackend: () => Promise<
 		Pick<CartItem, 'Quantity' | 'ItemId'>[]
 	>;
-
+	clearCart: () => void;
 	cartQuantity: number;
 	cartItems: CartItem[];
 }
@@ -114,6 +114,10 @@ export function ShoppingCartProvider({
 		[setCartItems],
 	);
 
+	const clearCart = useCallback(() => {
+		setCartItems([]);
+	}, [setCartItems]);
+
 	const setProductsFromBackend = async () => {
 		const products = await generalAPI.productsForCatalog();
 		const data = await generalAPI.cartInfo();
@@ -166,6 +170,7 @@ export function ShoppingCartProvider({
 				closeCart,
 				setProductsFromBackend,
 				removeFromCart,
+				clearCart,
 			}}
 		>
 			<ShoppingCartActionsContext.Provider value={actions}>
