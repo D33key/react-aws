@@ -16,7 +16,6 @@ import { toast } from 'sonner';
 import { memo, useState } from 'react';
 
 function Card({ item }: { item: Product }) {
-	console.log('Render Card whgy?');
 	const [isAdding, setIsAdding] = useState(false);
 	const navigate = useNavigate();
 	const { increaseQuantityOfProducts } = useShoppingCartActions();

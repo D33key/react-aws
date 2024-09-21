@@ -14,7 +14,7 @@ interface ShoppingCartContext {
 	openCart: () => void;
 	closeCart: () => void;
 	getQuantityOfProduct: (id: string) => number;
-
+	removeFromCart: (id: string) => void;
 	setProductsFromBackend: () => Promise<
 		Pick<CartItem, 'Quantity' | 'ItemId'>[]
 	>;
@@ -36,7 +36,6 @@ export interface CartItem {
 export type Actions = {
 	increaseQuantityOfProducts: (cart: Omit<CartItem, 'Quantity'>) => void;
 	decreaseQuantityOfProducts: (id: string) => void;
-	removeFromCart: (id: string) => void;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -145,9 +144,8 @@ export function ShoppingCartProvider({
 		() => ({
 			increaseQuantityOfProducts,
 			decreaseQuantityOfProducts,
-			removeFromCart,
 		}),
-		[increaseQuantityOfProducts, decreaseQuantityOfProducts, removeFromCart],
+		[increaseQuantityOfProducts, decreaseQuantityOfProducts],
 	);
 
 	useEffect(() => {
@@ -167,6 +165,7 @@ export function ShoppingCartProvider({
 				openCart,
 				closeCart,
 				setProductsFromBackend,
+				removeFromCart,
 			}}
 		>
 			<ShoppingCartActionsContext.Provider value={actions}>

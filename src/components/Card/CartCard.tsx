@@ -7,13 +7,10 @@ import {
 } from '@aws-amplify/ui-react';
 import { toast } from 'sonner';
 import generalAPI from '../../core/HTTPTransport/GeneralApi';
-import {
-	CartItem,
-	useShoppingCartActions,
-} from '../../core/Providers/CartProvider';
+import { CartItem, useShoppingCart } from '../../core/Providers/CartProvider';
 
 function CartCard({ item }: { item: CartItem }) {
-	const { removeFromCart } = useShoppingCartActions();
+	const { removeFromCart } = useShoppingCart();
 	return (
 		<CardAWS
 			borderRadius='medium'
