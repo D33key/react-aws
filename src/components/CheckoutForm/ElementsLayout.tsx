@@ -11,15 +11,16 @@ function ElementsLayout({ children }: { children: React.ReactNode }) {
 	);
 
 	useEffect(() => {
-		generalAPI
-			.totalAmountPayment()
-			.then((res) => setPaymentOptions(res as StripeElementsOptions));
+		generalAPI.totalAmountPayment().then((res) => setPaymentOptions(res));
 	}, []);
 
-	console.log(paymentOptions);
 
 	return (
-		<Elements stripe={stripePromise} options={paymentOptions}>
+		<Elements
+			stripe={stripePromise}
+			options={paymentOptions}
+			key={paymentOptions?.clientSecret}
+		>
 			{Object.keys(paymentOptions).length > 0 && children}
 		</Elements>
 	);

@@ -2,6 +2,7 @@ import { fetchAuthSession } from 'aws-amplify/auth';
 import BaseApi from './BaseApi';
 import { CartItem } from '../Providers/CartProvider';
 import { Product } from './types';
+import { StripeElementsOptions } from '@stripe/stripe-js';
 
 class GeneralApi extends BaseApi {
 	constructor() {
@@ -51,7 +52,7 @@ class GeneralApi extends BaseApi {
 			const productQuantity =
 				currentCart.find((item) => item.ItemId === itemId)?.Quantity || 0;
 
-			const response = await this.put(`/cart/${userToken}`, {
+			const response = await this.post(`/cart/${userToken}`, {
 				withCredentials: 'omit',
 				data: {
 					item_id: itemId,
@@ -94,10 +95,14 @@ class GeneralApi extends BaseApi {
 		const data = await response.json();
 
 		return {
-			mode: 'payment',
-			amount: data.totalAmount,
-			currency: data.currency,
-		};
+			// mode: 'payment',
+			// amount: data.totalAmount * 100,
+			// currency: data.currency.toLowerCase(),
+			clientSecret: data.clientSecret,
+			appearance: {
+				theme: 'stripe',
+			},
+		} as StripeElementsOptions;
 	}
 }
 
