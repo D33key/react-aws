@@ -28,7 +28,6 @@ function CheckoutForm() {
 			return;
 		}
 
-		// Create the PaymentIntent and obtain clientSecret from your server endpoint
 		const res = await generalAPI.totalAmountPayment();
 
 		const { clientSecret } = res;
@@ -46,6 +45,8 @@ function CheckoutForm() {
 				},
 			},
 		);
+
+		console.log(paymentIntent);
 
 		if (error) {
 			setErrorMessage(error.message ?? '');

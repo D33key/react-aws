@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import CheckoutForm from '../components/CheckoutForm/CheckoutForm';
 import ElementsLayout from '../components/CheckoutForm/ElementsLayout';
+import PaymentCart from '../components/PaymentCart/PaymentCart';
+import TotalAmount from '../components/TotalAmount/TotalAmount';
 
 function Payment() {
 	const { state } = useLocation();
@@ -12,6 +14,8 @@ function Payment() {
 
 	return (
 		<ElementsLayout>
+			<PaymentCart />
+			<TotalAmount />
 			<CheckoutForm />
 		</ElementsLayout>
 	);

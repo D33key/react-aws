@@ -38,6 +38,7 @@ function CartCard({ item }: { item: CartItem }) {
 				fontSize='1em'
 				fontStyle='normal'
 				textDecoration='none'
+				marginLeft='auto'
 			>
 				Price: {item.Price}
 			</Text>
@@ -49,9 +50,13 @@ function CartCard({ item }: { item: CartItem }) {
 				fontSize='1em'
 				fontStyle='normal'
 				textDecoration='none'
+				width='max-content'
+				display='flex'
 			>
 				Quantity:{' '}
-				<span style={{ display: 'block', textAlign: 'right' }}>
+				<span
+					style={{ display: 'block', textAlign: 'right', marginLeft: '5px' }}
+				>
 					{item.Quantity}
 				</span>
 			</Text>
