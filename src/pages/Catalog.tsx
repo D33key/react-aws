@@ -1,5 +1,13 @@
+import ProductCatalog from '../components/Collection/CollectionWrapper';
+
 const Catalog = () => {
-	return <div>Catalog</div>;
+	return (
+		<main style={{
+			padding: '20px'
+		}}>
+			<ProductCatalog />
+		</main>
+	);
 };
 
 export default Catalog;
